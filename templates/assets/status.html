@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Document</title>
+</head>
+<body>
+    <div class="container my-5">
+        <div class="row">
+            <!-- SINGLE CARD -->
+            <div class="col">
+                <div class="col-md">
+                    <div class="card text-center text-white text-uppercase mb-3 card-color" id="total_orders">
+                        <div class="card-header">
+                            <div class="fs-4"> Total Orders </div>
+                        </div>
+                        <div class="card-body">
+                            <div class="fs-3"> {{ total_orders }} </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+    
+            <div class="col">
+                <div class="col-md">
+                    <div class="card text-center text-white text-uppercase mb-3 card-color" id="orders_delivered">
+                        <div class="card-header">
+                            <div class="fs-4"> Orders Delivered </div>
+                        </div>
+                        <div class="card-body">
+                            <div class="fs-3"> {{ delivered }} </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="col">
+                <div class="col-md">
+                    <div class="card text-center text-white text-uppercase mb-3 card-color" id="orders_pending">
+                        <div class="card-header">
+                            <div class="fs-4"> Orders Pending </div>
+                        </div>
+                        <div class="card-body">
+                            <div class="fs-3"> {{ pending }} </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

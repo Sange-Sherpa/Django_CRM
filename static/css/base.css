@@ -1,0 +1,25 @@
+@import url('https://fonts.googleapis.com/css2?family=Source+Sans+Pro:wght@300;400;600;700&display=swap');
+
+*,
+*::before,
+*::after {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Source Sans Pro', sans-serif;
+}
+
+#total_orders {
+    background-color: #77cc6d;
+}
+
+#orders_delivered {
+    background-color: #2ac4ea !important;
+}
+
+#orders_pending {
+    background-color: #f6653c !important;
+}

@@ -1,0 +1,91 @@
+{% extends 'base.html' %}
+
+{% block title %}
+    Customers Page
+{% endblock title %}
+
+{% block content %}
+
+    <div class="container">
+
+        <!-- ------------ CARDS SHOWING CUSTOMER CREDENTIALS ------------ -->
+        <div class="row my-5">
+            <!-- SINGLE CARD -->
+            <div class="col">
+                <div class="col-md">
+                    <div class="card text-left text-dark text-uppercase mb-3 card-color">
+                        <div class="card-header">
+                            <div class="card-title text-capitalize fs-5 m-0 py-2"> Customer : {{ customer.name }} </div>
+                        </div>
+                        <div class="card-body">
+                            <button type="button" class="btn btn-outline-primary btn-block w-100 mb-3"> UPDATE </button>
+                            <button type="button" class="btn btn-outline-danger btn-block w-100"> DELETE </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="col">
+                <div class="col-md">
+                    <div class="card text-left text-dark text-uppercase mb-3 card-color">
+                        <div class="card-header">
+                            <div class="card-title text-capitalize fs-5 m-0 py-2"> Contact Infomation : </div>
+                        </div>
+                        <div class="card-body">
+                            <ul class="list-group list-group-flush">
+                                <li class="list-group-item"> Email : {{ customer.email }} </li>
+                                <li class="list-group-item"> Phone : {{ customer.phone }} </li>
+                              </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="col">
+                <div class="col-md">
+                    <div class="card text-left text-dark text-uppercase mb-3 card-color">
+                        <div class="card-header">
+                            <div class="card-title text-capitalize fs-5 m-0 py-2"> Total Orders : {{ total_orders }} </div>
+                        </div>
+                        <div class="card-body">
+                            <ul class="list-group list-group-flush">
+                                {% for order in orders %}
+                                    <li class="list-group-item"> {{ order.product.name }} | {{ order.product.category }} </li>
+                                {% endfor %}
+                              </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        <!-- ------------ CUSTOMER ORDER DETAILS IN A TABLE ------------ -->
+        <div class="row my-3">
+            <div class="col-md">
+                <div class="card card-body">
+                    <table class="table table-md w-100">
+                        <tr>
+                            <th> Product </th>
+                            <th> Category </th>
+                            <th> Date Ordered </th>
+                            <th> Status </th>
+                            <th> Update </th>
+                            <th> Remove </th>
+                        </tr>
+
+                        {% for order in orders %}
+                            <tr class="py-2">
+                                <td> {{ order.product.name }} </td>
+                                <td> {{ order.product.category }} </td>
+                                <td> {{ order.date_created }} </td>
+                                <td> {{ order.status }} </td>
+                                <td> <a href="#"> UPDATE </a> </td>
+                                <td> <a href="#"> REMOVE </a> </td>
+                            </tr>
+                        {% endfor %}
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+
+{% endblock content %}
