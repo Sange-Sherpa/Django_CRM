@@ -6,64 +6,80 @@
 
 {% block content %}
 
+    <!-- ------------ CARDS SHOWING CUSTOMER CREDENTIALS ------------ -->
+    <div class="row my-5">
+        <!-- SINGLE CARD -->
+
+        <p class="display-5"> <strong> {{ customer.name }} </strong> </p>
+
+        <div class="col">
+            <div class="col-md">
+                <div class="card text-left text-dark text-uppercase mb-3 card-color">
+                    <div class="card-header">
+                        <div class="card-title text-capitalize fs-5 m-0 py-2"> Actions : </div>
+                    </div>
+                    <div class="card-body">
+                        <a href="{% url 'update_customer' customer.id %}" class="btn btn-outline-primary btn-block w-100 mb-3"> UPDATE </a>
+                        <a href="{% url 'delete_customer' customer.id %}" class="btn btn-outline-danger btn-block w-100"> DELETE </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <div class="col">
+            <div class="col-md">
+                <div class="card text-left text-dark text-uppercase mb-3 card-color">
+                    <div class="card-header">
+                        <div class="card-title text-capitalize fs-5 m-0 py-2"> Contact Infomation : </div>
+                    </div>
+                    <div class="card-body">
+                        <ul class="list-group list-group-flush">
+                            <li class="list-group-item text-lowercase"> <span class="text-capitalize"> Email : </span> {{ customer.email }} </li>
+                            <li class="list-group-item text-lowercase"> <span class="text-capitalize"> Phone : </span> {{ customer.phone }} </li>
+                          </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <div class="col">
+            <div class="col-md">
+                <div class="card text-left text-dark text-uppercase mb-3 card-color">
+                    <div class="card-header">
+                        <div class="card-title text-capitalize fs-5 m-0 py-2"> Total Orders :  </div>
+                    </div>
+                    <div class="card-body">
+                        <p class="display-4 text-center"> {{ total_orders }} </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    <!-- ------------ CUSTOMER SEARCH FIELD/BUTTON ------------ -->
     <div class="container">
+        <div class="card card-body">
+            <div class="row">
+                <div class="col-md-3">
+                    <form class="d-flex justify-content-between">
+                        <button class="btn btn-secondary" type="submit">
+                            <i class="fa-solid fa-search"></i>
+                        </button>
+                        <input class="form-control me-2" type="search" placeholder="search customer ..." aria-label="Search">
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
 
-        <!-- ------------ CARDS SHOWING CUSTOMER CREDENTIALS ------------ -->
-        <div class="row my-5">
-            <!-- SINGLE CARD -->
-            <div class="col">
-                <div class="col-md">
-                    <div class="card text-left text-dark text-uppercase mb-3 card-color">
-                        <div class="card-header">
-                            <div class="card-title text-capitalize fs-5 m-0 py-2"> Customer : {{ customer.name }} </div>
-                        </div>
-                        <div class="card-body">
-                            <button type="button" class="btn btn-outline-primary btn-block w-100 mb-3"> UPDATE </button>
-                            <button type="button" class="btn btn-outline-danger btn-block w-100"> DELETE </button>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            
-            <div class="col">
-                <div class="col-md">
-                    <div class="card text-left text-dark text-uppercase mb-3 card-color">
-                        <div class="card-header">
-                            <div class="card-title text-capitalize fs-5 m-0 py-2"> Contact Infomation : </div>
-                        </div>
-                        <div class="card-body">
-                            <ul class="list-group list-group-flush">
-                                <li class="list-group-item"> Email : {{ customer.email }} </li>
-                                <li class="list-group-item"> Phone : {{ customer.phone }} </li>
-                              </ul>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            
-            <div class="col">
-                <div class="col-md">
-                    <div class="card text-left text-dark text-uppercase mb-3 card-color">
-                        <div class="card-header">
-                            <div class="card-title text-capitalize fs-5 m-0 py-2"> Total Orders : {{ total_orders }} </div>
-                        </div>
-                        <div class="card-body">
-                            <ul class="list-group list-group-flush">
-                                {% for order in orders %}
-                                    <li class="list-group-item"> {{ order.product.name }} | {{ order.product.category }} </li>
-                                {% endfor %}
-                              </ul>
-                        </div>
-                    </div>
-                </div>
-            </div>
 
-        <!-- ------------ CUSTOMER ORDER DETAILS IN A TABLE ------------ -->
+
+    <!-- ------------ CUSTOMER ORDER DETAILS IN A TABLE ------------ -->
+    <div class="container">
         <div class="row my-3">
             <div class="col-md">
                 <div class="card card-body">
                     <table class="table table-md w-100">
-                        <tr>
+                        <tr class="text-center">
                             <th> Product </th>
                             <th> Category </th>
                             <th> Date Ordered </th>
@@ -71,15 +87,23 @@
                             <th> Update </th>
                             <th> Remove </th>
                         </tr>
-
+    
                         {% for order in orders %}
-                            <tr class="py-2">
+                            <tr class="text-center">
                                 <td> {{ order.product.name }} </td>
                                 <td> {{ order.product.category }} </td>
                                 <td> {{ order.date_created }} </td>
                                 <td> {{ order.status }} </td>
-                                <td> <a href="#"> UPDATE </a> </td>
-                                <td> <a href="#"> REMOVE </a> </td>
+                                <td>
+                                    <a href="{% url 'update_order' order.id %}">
+                                        <i class="fa-solid fa-pen-to-square"></i>
+                                    </a>
+                                </td>
+                                <td class="text-center">
+                                    <a href="{% url 'delete_order' order.id %}">
+                                        <i class="fa-solid fa-trash-can"></i>
+                                    </a>
+                                </td>
                             </tr>
                         {% endfor %}
                     </table>

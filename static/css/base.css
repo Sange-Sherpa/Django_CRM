@@ -12,14 +12,27 @@ body {
     font-family: 'Source Sans Pro', sans-serif;
 }
 
+/* ----------- NAVIGATION SECTION ----------- */
+
+.text-underline-hover {
+    text-decoration: none;
+    transition: .3s linear;
+}
+
+.text-underline-hover:hover {
+    text-decoration: underline;
+}
+
+/* ----------- DASHBOARD SECTION ----------- */
+
 #total_orders {
     background-color: #77cc6d;
 }
 
 #orders_delivered {
-    background-color: #2ac4ea !important;
+    background-color: #2ac4ea;
 }
 
 #orders_pending {
-    background-color: #f6653c !important;
+    background-color: #f6653c;
 }

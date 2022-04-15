@@ -1,0 +1,14 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+	<p class="fs-5"> Are you sure you want to remove '{{ customer }}' ? </p>
+
+	<form method="POST">
+		{% csrf_token %}
+
+		<a href="{% url 'dashboard' %}" class="btn btn-light mr-4"> Cancel </a>
+		<input type="submit" class="btn btn-danger" value="Delete">
+	</form>
+
+{% endblock content %}

@@ -20,8 +20,9 @@ class Tag(models.Model):
 
 class Product(models.Model):
     CAGTEGORY       = (
-        ('Indoor', 'Indoor'),
-        ('Outdoor', 'Outdoor'),
+        ('Men', 'Men'),
+        ('Women', 'Women'),
+        ('Both', 'Both'),
     )
 
     name            =   models.CharField(max_length=200, null=True)
@@ -39,7 +40,6 @@ class Product(models.Model):
 class Order(models.Model):
     STATUS          = (
         ('Pending', 'Pending'),
-        ('Out for delivery', 'Out for delivery'),
         ('Delivered', 'Delivered'),
     )
 
@@ -49,4 +49,4 @@ class Order(models.Model):
     status         =   models.CharField(max_length=200, null=True, choices=STATUS)
 
     def __str__(self):
-        return self.product.name.capitalize()
+        return self.product.name

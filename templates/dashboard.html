@@ -1,64 +1,81 @@
 {% extends 'base.html' %}
 
 {% block title %}
-    Home Page
+Home Page
 {% endblock title %}
 
 {% block content %}
 
-    {% include 'assets/status.html' %}
-    
-    <div class="container">
-        <div class="row my-5">
-            <div class="col-md-5">
-                <p class="lead text-capitalize"> customers </p>
-                <hr>
-                <div class="card card-body">
-                    <a href="#" class="btn btn-primary btn-sm btn-block mb-4"> Create Customer </a>
-                    <table class="table table-sm">
+{% include 'assets/status.html' %}
+
+<div class="container">
+    <div class="row my-5">
+        <div class="col-md-5">
+            <p class="lead text-capitalize"> customers </p>
+            <hr>
+            <div class="card card-body">
+                <a href="{% url 'create_customer' %}" class="btn btn-light border-primary text-primary mb-4 py-2"> Create Customer </a>
+                <table class="table">
+                    <thead class="table-light text-center">
                         <tr>
-                            <th> # </th>
                             <th> Name </th>
                             <th> Phone </th>
-                            <th> Email </th>
+                            <th> View </th>
                         </tr>
+                    </thead>
+                    <tbody class="text-center">
                         {% for customer in customers %}
-                            <tr>
-                                <td> {{ customer.id }} </td>
-                                <td> {{ customer.name }} </td>
-                                <td> {{ customer.phone }} </td>
-                                <td> {{ customer.email }} </td>
-                            </tr>
+                        <tr>
+                            <td> {{ customer.name }} </td>
+                            <td> {{ customer.phone }} </td>
+                            <td><a href="{% url 'customers' customer.id %}"><i class="fa-solid fa-eye text-primary"></i></a> </td>
+                        </tr>
                         {% endfor %}
-                    </table>
-                </div>
+                    </tbody>
+                    <caption> Total Customers : {{ total_customers }} </caption>
+                </table>
             </div>
-    
-            <div class="col-md-7">
-                <p class="lead text-capitalize"> recent orders </p>
-                <hr>
-                <div class="card card-body">
-                    <a href="#" class="btn btn-primary btn-sm btn-block mb-4"> Create Order </a>
-                    <table class="table table-sm">
+        </div>
+
+        <div class="col-md-7">
+            <p class="lead text-capitalize"> recent orders </p>
+            <hr>
+            <div class="card card-body">
+                <a href="{% url 'create_order' %}" class="btn btn-light border-primary text-primary mb-4 py-2"> Create Order </a>
+
+                <table class="table">
+                    <thead class="table-light text-center">
                         <tr>
                             <th> Product </th>
                             <th> Date Ordered </th>
                             <th> Status </th>
-                            <th> Update </th>
-                            <th> Remove </th>
+                            <th> Edit </th>
+                            <th> Delete </th>
                         </tr>
+                    </thead>
+                    <tbody class="text-center">
                         {% for order in orders %}
-                            <tr>
-                                <td> {{ order.product.name }} </td>
-                                <td> {{ order.date_created }} </td>
-                                <td> {{ order.status }} </td>
-                                <td> <a href="#"> UPDATE </a> </td>
-                                <td> <a href="#"> REMOVE </a> </td>
-                            </tr>
+                        <tr>
+                            <td> {{ order.product.name }} </td>
+                            <td> {{ order.date_created }} </td>
+                            <td> {{ order.status }} </td>
+                            <td>
+                                <a href="{% url 'update_order' order.id %}">
+                                    <i class="fa-solid fa-pen-to-square"></i>
+                                </a>
+                            </td>
+                            <td class="text-center">
+                                <a href="{% url 'delete_order' order.id %}">
+                                    <i class="fa-solid fa-trash-can"></i>
+                                </a>
+                            </td>
+                        </tr>
                         {% endfor %}
-                    </table>
-                </div>
+                    </tbody>
+                    <caption> Total Orders : {{ total_orders }} </caption>
+                </table>
             </div>
         </div>
     </div>
+</div>
 {% endblock content %}
