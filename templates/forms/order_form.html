@@ -2,11 +2,20 @@
 
 {% block content %}
 
-    <form method="POST">
-        {% csrf_token %}
+    <div class="card card-body">
+        <form action="" method="POST">
+            {% csrf_token %}
 
-        {{ form.as_p }}
-        <input type="submit" class="btn btn-primary text-light" value="Confirm" />
-    </form>
+            {{ formset.management_form }}
+            <ul class="list-group list-group-flush">
+                {% for form in formset %}
+                    <li class="list-group-item text-lowercase"> {{ form.as_p }} </li>
+                {% endfor %}
+            </ul>
+            <input type="submit" value="Confirm" class="btn btn-primary">
+        </form>
+    </div>
 
 {% endblock content %}
+
+

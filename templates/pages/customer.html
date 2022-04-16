@@ -19,8 +19,9 @@
                         <div class="card-title text-capitalize fs-5 m-0 py-2"> Actions : </div>
                     </div>
                     <div class="card-body">
-                        <a href="{% url 'update_customer' customer.id %}" class="btn btn-outline-primary btn-block w-100 mb-3"> UPDATE </a>
-                        <a href="{% url 'delete_customer' customer.id %}" class="btn btn-outline-danger btn-block w-100"> DELETE </a>
+                        <a href="{% url 'update_customer' customer.id %}" class="btn btn-outline-primary btn-block w-100 text-capitalize mb-3"> update </a>
+                        <a href="{% url 'create_order' customer.id %}" class="btn btn-outline-success btn-block w-100 text-capitalize mb-3"> place order </a>
+                        <a href="{% url 'delete_customer' customer.id %}" class="btn btn-outline-danger btn-block w-100 text-capitalize"> delete </a>
                     </div>
                 </div>
             </div>
@@ -78,7 +79,7 @@
         <div class="row my-3">
             <div class="col-md">
                 <div class="card card-body">
-                    <table class="table table-md w-100">
+                    <table class="table table-md w-100 text-capitalize">
                         <tr class="text-center">
                             <th> Product </th>
                             <th> Category </th>
