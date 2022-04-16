@@ -13,7 +13,7 @@ urlpatterns = [
     # PAGES
     path('user/', userPage, name='user'),
     path('products/', product, name='products'),
-    path('orders/', order, name='orders'),
+    # path('orders/', order, name='orders'), # deleted page
     path('customer/<int:pk>/', customer, name='customers'),
 
     # FORMS
