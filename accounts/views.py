@@ -19,14 +19,15 @@ def userRegister(request):
     if request.method == 'POST':
         form    =   CreateUserForm(request.POST)
         if form.is_valid():
-            user     =   form.save()
-            username = form.cleaned_data.get('username')
+            user     =  form.save()
+            username =  form.cleaned_data.get('username')
 
             # This assigns customer group to the user during registration...
             group = Group.objects.get(name='Customer')
             user.groups.add(group)
             Customer.objects.create(
                 user=user,
+                name=user.username,
             )
 
             messages.success(request, f'{username}, your account has been successfully created.')
@@ -89,7 +90,10 @@ def dashboard(request):
 @allowed_users(allowed_roles=['Admin'])
 def product(request):
     products    =   Product.objects.all()
-    return render(request, 'pages/product.html', {'products': products})
+
+    context     =   {'products': products}
+    return render(request, 'pages/product.html', context)
+
 
 
 @login_required(login_url='login')
@@ -111,6 +115,22 @@ def userPage(request):
     return render(request, 'pages/user.html', context)
 
 
+@login_required(login_url='login')
+@allowed_users(allowed_roles=['Customer'])
+def accountSettings(request):
+    customer    =   request.user.customer
+    form        =   CustomerForm(instance=customer)
+    
+    if request.method == 'POST':
+        form    =   CustomerForm(request.POST, request.FILES, instance=customer)
+        if form.is_valid():
+            form.save()
+            # return redirect('/')
+
+    context =   {'form': form}
+    return render(request, 'pages/account_settings.html', context)
+
+
 
 # ORDERS RELATED --------------
 @allowed_users(allowed_roles=['Admin'])
@@ -121,7 +141,6 @@ def createOrder(request, pk):
     # form          =   OrderForm(initial={'customer': customer}) # jasko lagi order place garne ho ... tesko name display huncha
 
     if request.method == 'POST': 
-        # form = OrderForm(request.POST)
         formset     =   OrderFormSet(request.POST, instance=customer)
 
         if formset.is_valid():
@@ -130,6 +149,7 @@ def createOrder(request, pk):
 
     context =   {'formset': formset}
     return render(request, 'forms/order_form.html', context)
+
 
 
 @allowed_users(allowed_roles=['Admin'])
@@ -142,12 +162,13 @@ def updateOrder(request, pk):
         if form.is_valid():
             form.save()
             return redirect('/')
-
+ 
     context = {'form': form}
     return render(request, 'forms/order_form.html', context)
 
 
-@allowed_users(allowed_roles=['Admin'])
+
+@allowed_users
 def deleteOrder(request, pk):
     order   = Order.objects.get(id=pk)
 
@@ -176,6 +197,7 @@ def customer(request, pk):
     return render(request, 'pages/customer.html', context)
 
 
+
 @allowed_users(allowed_roles=['Admin'])
 def createCustomer(request):
     form    =   CustomerForm()
@@ -191,6 +213,7 @@ def createCustomer(request):
     return render(request, 'forms/customer_form.html', context)
 
 
+
 @allowed_users(allowed_roles=['Admin'])
 def updateCustomer(request, pk):
     customer    =   Customer.objects.get(id=pk)
@@ -204,6 +227,7 @@ def updateCustomer(request, pk):
 
     context = {'form': form}
     return render(request, 'forms/customer_form.html', context)
+
 
 
 @allowed_users(allowed_roles=['Admin'])

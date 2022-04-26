@@ -4,7 +4,7 @@
 {% block content %}
     {% include 'assets/status.html' %}
 
-    <p class="display-3 text-capitalize"> {{ request.user.username }} </p>
+    <p class="display-5 text-capitalize"> Welcome, {{ request.user.username }} </p>
 
     <div class="card card-body">
         <table class="table">
@@ -25,5 +25,6 @@
                 {% endfor %}
             </tbody>
         </table>
+        <caption> Total Orders: {{ total_orders }} </caption>
     </div>
 {% endblock content %}
