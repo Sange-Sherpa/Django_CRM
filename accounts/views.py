@@ -19,16 +19,8 @@ def userRegister(request):
     if request.method == 'POST':
         form    =   CreateUserForm(request.POST)
         if form.is_valid():
-            user     =  form.save()
+            form.save()
             username =  form.cleaned_data.get('username')
-
-            # This assigns customer group to the user during registration...
-            group = Group.objects.get(name='Customer')
-            user.groups.add(group)
-            Customer.objects.create(
-                user=user,
-                name=user.username,
-            )
 
             messages.success(request, f'{username}, your account has been successfully created.')
             return redirect('/')
@@ -125,7 +117,6 @@ def accountSettings(request):
         form    =   CustomerForm(request.POST, request.FILES, instance=customer)
         if form.is_valid():
             form.save()
-            # return redirect('/')
 
     context =   {'form': form}
     return render(request, 'pages/account_settings.html', context)
